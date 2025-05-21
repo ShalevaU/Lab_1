@@ -11,6 +11,10 @@ int** createMatrix(size_t rows, size_t cols, int rangeA, int rangeB)
        rangeA=rangeB;
        rangeB=tmp;
     }
+    if (rows==0 || cols==0)
+    {
+        return 0;
+    }
     int** matrix = (int**)malloc(rows * sizeof(int*));//строки
     if (matrix == NULL) 
     {
@@ -45,14 +49,12 @@ int** createMatrix(size_t rows, size_t cols, int rangeA, int rangeB)
 //2
 void freeMatrix(int** matrix, size_t rows) 
 {
-    if (matrix) 
+ 
+    for (size_t i = 0; i < rows; i++) 
     {
-        for (size_t i = 0; i < rows; i++) 
-        {
-            free(matrix[i]);
-        }
-        free(matrix);
+        free(matrix[i]);
     }
+    free(matrix);
 }
 
 //3
@@ -74,7 +76,7 @@ void printMatrix(int** matrix, size_t rows, size_t cols)
 int main() 
 {
     size_t rows=3, cols=3;
-    int rangeA=-20, rangeB=5;
+    int rangeA=5, rangeB=20;
 
     int** matrix = createMatrix(rows, cols, rangeA, rangeB);
     if (matrix == NULL) 
